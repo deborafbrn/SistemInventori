@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use DB;
+use Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -36,5 +40,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function loginUser(Request $request)
+    {
+        $user = DB::table('users')->where('username',$request->username)->first();
+        if($user)
+        {
+            if (!Hash::check($request->password, $user->password))
+            {
+                return redirect()->back()->with('error','Mohon maaf password yang anda masukkan salah, mohon cek kembali!');
+            }
+            $user = User::find($user->id);
+            Auth::login($user);
+            return redirect('home');
+        }
+        return redirect()->back()->with('error','Mohon maaf username anda tidak ditemukan, mohon cek kembali!');
     }
 }
