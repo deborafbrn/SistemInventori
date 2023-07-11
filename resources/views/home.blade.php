@@ -1,5 +1,10 @@
 @extends('layouts.main')
-
+@section('csscustom')
+<link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+@endsection
 @section('content')
 <div class="content-wrapper">
             <div class="row">
@@ -184,4 +189,7 @@
               </div>
             </div>
           </div>
+@endsection
+@section('scriptcustom')
+
 @endsection

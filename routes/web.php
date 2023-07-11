@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes();
@@ -27,12 +27,16 @@ Route::post('/login_sistem', [LoginController::class, 'loginUser']);
 
 // Produk
 Route::get('/produk', [ProdukController::class, 'index']);
-Route::get('/produk_delete', [ProdukController::class, 'delete']);
+Route::get('/produk_create', [ProdukController::class, 'create']);
+Route::get('/produk_edit/{id}', [ProdukController::class, 'edit']);
+Route::get('/produk_delete/{id}', [ProdukController::class, 'delete']);
 Route::post('/produk_store', [ProdukController::class, 'store']);
-Route::post('/produk_update', [ProdukController::class, 'update']);
+Route::post('/produk_update/{id}', [ProdukController::class, 'update']);
 
 // Transaksi
 Route::get('/transaksi', [TransaksiController::class, 'index']);
-Route::get('/transaksi_delete', [TransaksiController::class, 'delete']);
+Route::get('/transaksi_create', [TransaksiController::class, 'create']);
+Route::get('/transaksi_edit/{id}', [TransaksiController::class, 'edit']);
+Route::get('/transaksi_delete/{id}', [TransaksiController::class, 'delete']);
 Route::post('/transaksi_store', [TransaksiController::class, 'store']);
-Route::post('/transaksi_update', [TransaksiController::class, 'update']);
+Route::post('/transaksi_update/{id}', [TransaksiController::class, 'update']);

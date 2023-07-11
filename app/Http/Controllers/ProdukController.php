@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Carbon;
+use Carbon\Carbon;
 class ProdukController extends Controller
 {
     /**
@@ -28,6 +28,17 @@ class ProdukController extends Controller
         return view('produk.index',compact('data'));
     }
 
+    public function create()
+    {
+        return view('produk.add');
+    }
+
+    public function edit($id)
+    {
+        $data = DB::table('produk')->where('id',$id)->first();
+        return view('produk.edit',compact('data'));
+    }
+
     public function store(Request $request)
     {
         $createdAt = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
@@ -41,12 +52,13 @@ class ProdukController extends Controller
             'nama'=>$request->nama,
             'kode'=>$request->kode,
             'kemasan'=>$request->kemasan,
+            'qty_borongan'=>$request->qty_borongan,
             'harga_satuan'=>$request->harga_satuan,
             'harga_borongan'=>$request->harga_borongan,
             'created_at'=>$createdAt
         ]);
 
-        return redirect()->back()->with('success','Data produk berhasil ditambahkan');
+        return redirect('produk')->with('success','Data produk berhasil ditambahkan');
     }
 
     public function update(Request $request,$id)
@@ -67,10 +79,11 @@ class ProdukController extends Controller
             'kemasan'=>$request->kemasan,
             'harga_satuan'=>$request->harga_satuan,
             'harga_borongan'=>$request->harga_borongan,
+            'qty_borongan'=>$request->qty_borongan,
             'updated_at'=>$createdAt
         ]);
 
-        return redirect()->back()->with('success','Data produk berhasil diubah');
+        return redirect('produk')->with('success','Data produk berhasil diubah');
     }
 
     public function delete($id)
