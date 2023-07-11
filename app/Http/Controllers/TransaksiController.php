@@ -22,10 +22,20 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('transaksi')->orderBy('created_at','DESC')->paginate(10);
-        $item = [];
+        $get = DB::table('transaksi');
+        if($request->search)
+        {
+            if($request->search != null)
+            {
+                $get->where('kode',$request->search);
+                $get->Orwhere('customer',$request->search);
+            }
+        }
+        $get->orderBy('created_at','DESC');
+        $data =$get->paginate(10);
+        $itemTrs = [];
         foreach ($data as $key => $value) 
         {
             $items = DB::table('transaksi_item as ti')
@@ -33,14 +43,12 @@ class TransaksiController extends Controller
                     ->where('ti.transaksi_id',$value->id)
                     ->select('ti.*','pd.nama','pd.kode')
                     ->get();
-            $item[$value->id]['qty'] = count($items);
             foreach ($items as $itemKey => $itemValue) 
             {
-                $item[$value->id][$itemKey]['produk'] = $itemValue->name.' - '.$itemValue->kode;
-                $item[$value->id][$itemKey]['total'] = $itemValue->total; 
+                $itemTrs[$value->id][$itemKey]['produk'] = $itemValue->name.' - '.$itemValue->kode;
             }
         }
-        return view('transaksi.index',compact('data','item'));
+        return view('transaksi.index',compact('data','itemTrs','request'));
     }
 
     public function create()
@@ -75,13 +83,13 @@ class TransaksiController extends Controller
                $produk = DB::table('produk')->where('id',$value)->first();
                if($request->tipe_produk[$key] == 'borongan')
                {
-                    $borongan = $produk->harga_borongan;
+                    $borongan = intval(str_replace('.', '', $produk->harga_borongan));
                     $qty = 10 * $request->qty_produk[$key];
                     $borongan += $qty * $borongan;
                     $total += $borongan;
                }else
                {
-                    $satuan = $produk->harga_satuan;
+                    $satuan = intval(str_replace('.', '', $produk->harga_satuan));
                     $qty = $request->qty_produk[$key];
                     $satuan += $qty * $satuan;
                     $total += $satuan;
@@ -103,12 +111,12 @@ class TransaksiController extends Controller
                $produk = DB::table('produk')->where('id',$value)->first();
                if($request->tipe_produk[$key] == 'borongan')
                {
-                    $total_item_paid = $produk->harga_borongan;
+                    $total_item_paid = intval(str_replace('.', '', $produk->harga_borongan));
                     $qty = 10 * $request->qty_produk[$key];
                     $total_item_paid += $qty * $total_item_paid;
                }else
                {
-                    $total_item_paid = $produk->harga_satuan;
+                    $total_item_paid = intval(str_replace('.', '', $produk->harga_satuan));
                     $qty = $request->qty_produk[$key];
                     $total_item_paid += $qty * $total_item_paid;
                }

@@ -21,12 +21,16 @@
 	                  				<i class="mdi mdi-plus-circle-outline"></i> Tambah Data
 	                  			</a>
 	                  		</div>
+	                  		
 	                    	<div class="col-md-6" >
+	                    		<form action="{{url('produk')}}">
 	                    		<div class="input-group mb-3">
-								  <input type="text" class="form-control" placeholder="Cari Nama atau Kode Poduk" aria-label="Recipient's username" aria-describedby="button-addon2">
+								  <input type="text" class="form-control" placeholder="Cari Nama atau Kode Poduk" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{$request->search}}" name="search">
 								  <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="mdi mdi-account-search"></i></button>
 								</div>
+								</form>
 	                  		</div>
+	                  		
 	                	</div>
 	                    <div class="table-responsive">
 	                      <table class="table table-striped">
@@ -64,7 +68,7 @@
 	                        </tbody>
 	                      </table>
 	                    </div>
-	                    <div class="col-md-12" align="right">
+	                    <div class="col-md-12" align="right" style="padding-top: 10px;">
 	                    	{{ $data->links() }}
 	                    </div>
 	                  </div>

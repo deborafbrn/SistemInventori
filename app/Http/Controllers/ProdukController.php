@@ -22,10 +22,20 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = DB::table('produk')->orderBy('created_at','DESC')->paginate(10);
-        return view('produk.index',compact('data'));
+        $get = DB::table('produk');
+        $get->orderBy('created_at','DESC');
+        if($request->search)
+        {
+            if($request->search != null)
+            {
+                $get->where('kode',$request->search);
+                $get->Orwhere('nama', 'like', '%' . $request->search . '%');
+            }
+        }
+        $data = $get->paginate(5);
+        return view('produk.index',compact('data','request'));
     }
 
     public function create()
