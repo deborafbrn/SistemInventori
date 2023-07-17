@@ -45,7 +45,14 @@ class TransaksiController extends Controller
                     ->get();
             foreach ($items as $itemKey => $itemValue) 
             {
-                $itemTrs[$value->id][$itemKey]['produk'] = $itemValue->nama.' - '.$itemValue->kode.' - '.$itemValue->qty;
+                $itemTrs[$value->id][$itemKey]['produk'] = $itemValue->nama.' - '.$itemValue->kode;
+                if($itemValue->borongan)
+                {
+                    $itemTrs[$value->id][$itemKey]['qty'] = $itemValue->qty.' (Borongan)';
+                }else
+                {
+                    $itemTrs[$value->id][$itemKey]['qty'] = $itemValue->qty;
+                }
             }
         }
         return view('transaksi.index',compact('data','itemTrs','request'));
@@ -73,12 +80,17 @@ class TransaksiController extends Controller
         $data = DB::table('transaksi')->where('id',$id)->first();
         $item = DB::table('transaksi_item')->where('transaksi_id',$id)->get();
         $itemArr = [];
+        $borongan = [];
         foreach ($item as $key => $value) 
         {
             array_push($itemArr, $value->produk_id);
+            //array_push($borongan, $value->borongan);
+            $borongan[$value->produk_id]['borongan'] = $value->borongan;
+            $borongan[$value->produk_id]['qty'] = $value->qty;
+            $borongan[$value->produk_id]['qty_real'] = $value->qty_real;
         }
         $produk = DB::table('produk')->get();
-        return view('transaksi.edit',compact('produk','item','itemArr','data'));
+        return view('transaksi.edit',compact('produk','item','itemArr','data','borongan'));
     }
 
     public function store(Request $request)

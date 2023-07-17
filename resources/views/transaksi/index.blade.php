@@ -59,7 +59,8 @@
 	                          			<ul style="line-height: 30px;">
 	                          				@foreach($itemTrs[$item->id] as $itemTrsKey => $itemTrsValue)
 	                          					<li>
-	                          						Produk : {{$itemTrsValue['produk']}}
+	                          						Produk : {{$itemTrsValue['produk']}}<br>
+	                          						Qty : {{$itemTrsValue['qty']}}
 	                          					</li>
 	                          				@endforeach
 	                          			</ul>

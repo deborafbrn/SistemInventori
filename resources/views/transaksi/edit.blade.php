@@ -8,22 +8,22 @@
 	         <nav aria-label="breadcrumb">
 	            <ol class="breadcrumb">
 	               <li class="breadcrumb-item"><a href="#">Transaksi</a></li>
-	               <li class="breadcrumb-item active" aria-current="page">Tambah</li>
+	               <li class="breadcrumb-item active" aria-current="page">Ubah</li>
 	          </ol>
 	      </nav>
 	   </div>
 	   <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Tambah Transaksi</h4>
-                    <form class="form-sample" action="{{url('transaksi_store')}}" method="POST" enctype="multipart/form-data">
+                    <h4 class="card-title">Ubah Transaksi</h4>
+                    <form class="form-sample" action="{{url('transaksi_update')}}/{{$data->id}}" method="POST" enctype="multipart/form-data">
                     	@csrf
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kode" value="{{$kode}}" required placeholder="Contoh : TRS-123" class="form-control" />
+                              <input type="text" name="kode" value="{{$data->kode}}" required placeholder="Contoh : TRS-123" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -31,7 +31,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
-                              <input type="date" name="tanggal" value="{{date('Y-m-d')}}" required class="form-control"/>
+                              <input type="date" name="tanggal" value="{{$data->tanggal}}" required class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -39,7 +39,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Customer</label>
                             <div class="col-sm-9">
-                              <input type="text" name="customer"  required class="form-control" placeholder="Cth : Adi Pangabean" />
+                              <input type="text" name="customer" value="{{$data->customer}}" required class="form-control" placeholder="Cth : Adi Pangabean" />
                             </div>
                           </div>
                         </div>
@@ -52,15 +52,24 @@
                           <div class="col-md-4">
                             <div class="form-group row">
                               <div class="col-auto">
-                                <input type="checkbox" name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                               @if(in_array($item->id,$itemArr))
+                                <input type="checkbox" checked name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                                @else
+                                 <input type="checkbox" name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                                @endif
                               </div>
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group row">
                               <div class="col-auto">
-                                <input type="radio" onclick="borongan('<?php echo $item->id?>','<?php echo $item->qty_borongan?>')" name="tipe_produk[{{$key}}]"  value="borongan">&nbsp; Borongan &nbsp;
+                                @if(isset($borongan[$item->id]['borongan']) && $borongan[$item->id]['borongan'])
+                                <input type="radio" checked onclick="borongan('<?php echo $item->id?>','<?php echo $item->qty_borongan?>')" name="tipe_produk[{{$key}}]"  value="borongan">&nbsp; Borongan &nbsp;
+                                <input type="radio" onclick="borongan('<?php echo $item->id?>','0')" name="tipe_produk[{{$key}}]"  value="tidak">&nbsp; Tidak
+                                @else
+                                 <input type="radio" onclick="borongan('<?php echo $item->id?>','<?php echo $item->qty_borongan?>')" name="tipe_produk[{{$key}}]"  value="borongan">&nbsp; Borongan &nbsp;
                                 <input type="radio" onclick="borongan('<?php echo $item->id?>','0')" name="tipe_produk[{{$key}}]" checked value="tidak">&nbsp; Tidak
+                                @endif
                               </div>
                             </div>
                           </div>
@@ -70,7 +79,15 @@
                                 Qty
                               </label>
                               <div class="col-sm-9">
-                                <input type="number" name="qty_produk[]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Cth : 10">
+                                @if(isset($borongan[$item->id]['borongan']) && $borongan[$item->id]['borongan'])
+                                <input type="number" name="qty_produk[]" value="{{$borongan[$item->id]['qty_real']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                @else
+                                	@if(isset($borongan[$item->id]['qty']))
+                                 		<input type="number" name="qty_produk[]" value="{{$borongan[$item->id]['qty']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                 	@else
+                                 		<input type="number" name="qty_produk[]" value="0" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                 	@endif
+                                @endif
                               </div>
                             </div>
                           </div>
