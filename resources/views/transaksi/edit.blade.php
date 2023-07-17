@@ -53,9 +53,9 @@
                             <div class="form-group row">
                               <div class="col-auto">
                                @if(in_array($item->id,$itemArr))
-                                <input type="checkbox" checked name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                                <input type="checkbox" checked name="produk_id[{{$key}}]" id="produk{{$key}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
                                 @else
-                                 <input type="checkbox" name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                                 <input type="checkbox" name="produk_id[{{$key}}]" id="produk{{$key}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
                                 @endif
                               </div>
                             </div>
@@ -80,12 +80,12 @@
                               </label>
                               <div class="col-sm-9">
                                 @if(isset($borongan[$item->id]['borongan']) && $borongan[$item->id]['borongan'])
-                                <input type="number" name="qty_produk[]" value="{{$borongan[$item->id]['qty_real']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                <input type="number" name="qty_produk[{{$key}}]" value="{{$borongan[$item->id]['qty_real']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
                                 @else
                                 	@if(isset($borongan[$item->id]['qty']))
-                                 		<input type="number" name="qty_produk[]" value="{{$borongan[$item->id]['qty']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                 		<input type="number" name="qty_produk[{{$key}}]" value="{{$borongan[$item->id]['qty']}}" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
                                  	@else
-                                 		<input type="number" name="qty_produk[]" value="0" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
+                                 		<input type="number" name="qty_produk[{{$key}}]" value="0" id="qty_produk{{$item->id}}" class="form-control" placeholder="Cth : 10">
                                  	@endif
                                 @endif
                               </div>

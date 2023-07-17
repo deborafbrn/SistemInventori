@@ -52,7 +52,7 @@
                           <div class="col-md-4">
                             <div class="form-group row">
                               <div class="col-auto">
-                                <input type="checkbox" name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                                <input type="checkbox" name="produk_id[{{$key}}]" id="produk{{$key}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
                               </div>
                             </div>
                           </div>
@@ -70,7 +70,7 @@
                                 Qty
                               </label>
                               <div class="col-sm-9">
-                                <input type="number" name="qty_produk[]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Cth : 10">
+                                <input type="number" name="qty_produk[{{$key}}]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Cth : 10">
                               </div>
                             </div>
                           </div>

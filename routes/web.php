@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\FpGrowthController;
 use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::get('/transaksi_edit/{id}', [TransaksiController::class, 'edit']);
 Route::get('/transaksi_delete/{id}', [TransaksiController::class, 'delete']);
 Route::post('/transaksi_store', [TransaksiController::class, 'store']);
 Route::post('/transaksi_update/{id}', [TransaksiController::class, 'update']);
+
+//FpGrowth
+Route::get('/fp-growth', [FpGrowthController::class, 'index']);

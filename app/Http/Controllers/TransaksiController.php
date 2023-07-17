@@ -34,7 +34,7 @@ class TransaksiController extends Controller
             }
         }
         $get->orderBy('created_at','DESC');
-        $data =$get->paginate(10);
+        $data =$get->paginate(5);
         $itemTrs = [];
         foreach ($data as $key => $value) 
         {
@@ -123,7 +123,7 @@ class TransaksiController extends Controller
 
             $transaksiId = DB::table('transaksi')->insertGetId([
                 'customer'=>$request->customer,
-                'tanggal'=>$now,
+                'tanggal'=>$request->tanggal,
                 'kode'=>$request->kode,
                 'grandtotal'=>$total,
                 'total_produk'=>$qty_trs,
@@ -171,6 +171,7 @@ class TransaksiController extends Controller
 
     public function update(Request $request,$id)
     {
+       // dd($request->all());
         $createdAt = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         $now =  Carbon::now('Asia/Jakarta')->format('Y-m-d');
         $total = 0;
@@ -183,7 +184,7 @@ class TransaksiController extends Controller
                if($request->tipe_produk[$key] == 'borongan')
                {
                     $borongan = $produk->harga_borongan;
-                    $qty = 10 * $request->qty_produk[$key];
+                    $qty = $produk->qty_borongan * $request->qty_produk[$key];
                     $borongan += $qty * $borongan;
                     $total += $borongan;
                }else
@@ -196,10 +197,10 @@ class TransaksiController extends Controller
 
                $qty_trs += $qty;
             }
-
+            //dd($total);
             $transaksiId = DB::table('transaksi')->where('id',$id)->update([
                 'customer'=>$request->customer,
-                'tanggal'=>$now,
+                'tanggal'=>$request->tanggal,
                 'kode'=>$request->kode,
                 'grandtotal'=>$total,
                 'total_produk'=>$qty_trs,
