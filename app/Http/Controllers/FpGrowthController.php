@@ -33,8 +33,9 @@ class FpGrowthController extends Controller
         $pattern = $data['pattern'];
         $patternDetail = $data['pattern_detail'];
         $final = $data['final'];
+        $word = $data['word'];
         //dd($frekuensi);
-        return view('fp-growth.index',compact('request','transaksi','produk','frekuensi','support','supportFilter','pattern','patternDetail','final'));
+        return view('fp-growth.index',compact('request','transaksi','produk','frekuensi','support','supportFilter','pattern','patternDetail','final','word'));
     }
 
     public function getTransaksi($start,$end)
@@ -214,9 +215,24 @@ class FpGrowthController extends Controller
            $expP = explode(',', $value['pattern']);
            if(count($expP) > 2)
            {
-                
+                $pd1 = DB::table('produk')->where('kode',$expP[0])->first();
+                $wordFinal .= '<p>Jika membeli <m style="color:red;">'.$pd1->nama.'</m> maka akan membeli ';
+                unset($expP[0]);
+                $pd = DB::table('produk')->whereIn('kode',$expP)->get();
+                $wrd2 = [];
+                foreach ($pd as $pdKey => $pdV) 
+                {
+                    array_push($wrd2, $pdV->nama);
+                }
+                $wordFinal .= '<m style="color:green;">'.implode(',', $wrd2).'</m>';
+           }else
+           {
+                $pd1 = DB::table('produk')->where('kode',$expP[0])->first();
+                $pd2 = DB::table('produk')->where('kode',$expP[1])->first();
+                $wordFinal .= '<p>Jika membeli <m style="color:red;">'.$pd1->nama.'</m> maka akan membeli <m style="color:green;">'.$pd2->nama.'</m></p>';
            }
         }
+       // dd($wordFinal);
         $data = [
                     'arr'=>$arr,'produk'=>$produkArr
                     ,'frekuensi'=>$itemFrekuensi
@@ -225,6 +241,7 @@ class FpGrowthController extends Controller
                     ,'pattern'=>$finalKombinasi
                     ,'pattern_detail'=>$pattern
                     ,'final'=>$finalSupport
+                    ,'word'=>$wordFinal
                 ];
         return $data;
     }

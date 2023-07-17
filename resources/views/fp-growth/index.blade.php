@@ -245,6 +245,10 @@
 	                      </table>
 	                  	</div>
 					</div>
+					<div class="col-md-12" style="padding-top: 20px;">
+						<p align="center">Hasil Kombinasi</p>
+						<?php echo $word?>
+					</div>
 				</div>
 			</div>
 		</div>

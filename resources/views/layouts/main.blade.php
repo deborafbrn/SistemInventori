@@ -55,6 +55,7 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+          @if(Auth::user()->role == 'gudang')
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{url('produk')}}">
               <span class="menu-icon">
@@ -63,6 +64,8 @@
               <span class="menu-title">Produk</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->role == 'kasir')
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{url('transaksi')}}">
               <span class="menu-icon">
@@ -71,6 +74,8 @@
               <span class="menu-title">Transaksi</span>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->role == 'gudang')
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{url('fp-growth')}}">
               <span class="menu-icon">
@@ -79,6 +84,7 @@
               <span class="menu-title">Fp Growth</span>
             </a>
           </li>
+          @endif
         </ul>
       </nav>
       <!-- partial -->
