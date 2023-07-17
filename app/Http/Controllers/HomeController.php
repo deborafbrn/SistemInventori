@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Carbon;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -24,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $produk = DB::table('produk')->count();
+        $transaksi = DB::table('transaksi')->count();
+        $transaksiToday = DB::table('transaksi')->where('tanggal',Carbon::now('Asia/Jakarta')->format('Y-m-d'))->count();
+        $transaksiBulan =DB::table('transaksi')->whereMonth('tanggal',Carbon::now('Asia/Jakarta')->format('m'))->count();
+        return view('home',compact('produk','transaksi','transaksiToday','transaksiBulan'));
     }
 }

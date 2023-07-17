@@ -14,7 +14,7 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">120</h3>
+                          <h3 class="mb-0">{{$produk}}</h3>
                         </div>
                       </div>
                       <div class="col-3">
@@ -33,7 +33,7 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">320</h3>
+                          <h3 class="mb-0">{{$transaksi}}</h3>
                         </div>
                       </div>
                       <div class="col-3">
@@ -52,7 +52,7 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">100</h3>
+                          <h3 class="mb-0">{{$transaksiToday}}</h3>
                         </div>
                       </div>
                       <div class="col-3">
@@ -71,7 +71,7 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">200</h3>
+                          <h3 class="mb-0">{{$transaksiBulan}}</h3>
                         </div>
                       </div>
                       <div class="col-3">
