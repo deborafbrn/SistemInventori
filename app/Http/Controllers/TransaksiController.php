@@ -95,7 +95,7 @@ class TransaksiController extends Controller
                if($request->tipe_produk[$key] == 'borongan')
                {
                     $borongan = intval(str_replace('.', '', $produk->harga_borongan));
-                    $qty = 10 * $request->qty_produk[$key];
+                    $qty = $produk->qty_borongan * $request->qty_produk[$key];
                     $borongan += $qty * $borongan;
                     $total += $borongan;
                }else
@@ -120,12 +120,17 @@ class TransaksiController extends Controller
 
             foreach ($request->produk_id as $key => $value) 
             {
+               $boronganQty = 0;
+               $boronganQtyNya = 0;
+               $qtyReal = $request->qty_produk[$key];
                $produk = DB::table('produk')->where('id',$value)->first();
                if($request->tipe_produk[$key] == 'borongan')
                {
                     $total_item_paid = intval(str_replace('.', '', $produk->harga_borongan));
-                    $qty = 10 * $request->qty_produk[$key];
+                    $qty = $produk->qty_borongan * $request->qty_produk[$key];
                     $total_item_paid += $qty * $total_item_paid;
+                    $boronganQty = 1;
+                    $boronganQtyNya = $produk->qty_borongan;
                }else
                {
                     $total_item_paid = intval(str_replace('.', '', $produk->harga_satuan));
@@ -136,12 +141,15 @@ class TransaksiController extends Controller
                 DB::table('transaksi_item')->insert([
                     'transaksi_id'=>$transaksiId,
                     'produk_id'=>$value,
+                    'borongan'=>$boronganQty,
                     'qty'=>$qty,
+                    'qty_borongan'=>$boronganQtyNya,
+                    'qty_real'=>$qtyReal,
                     'total'=>$total_item_paid,
                     'created_at'=>$createdAt
                 ]);
-            }
 
+            }
             return redirect('transaksi')->with('success','Berhasil menambahkan data transaksi');
         }else
         {
@@ -190,15 +198,20 @@ class TransaksiController extends Controller
 
             foreach ($request->produk_id as $key => $value) 
             {
+               $boronganQty = 0;
+               $boronganQtyNya = 0;
+               $qtyReal = $request->qty_produk[$key];
                $produk = DB::table('produk')->where('id',$value)->first();
                if($request->tipe_produk[$key] == 'borongan')
                {
-                    $total_item_paid = $produk->harga_borongan;
-                    $qty = 10 * $request->qty_produk[$key];
+                    $total_item_paid = intval(str_replace('.', '', $produk->harga_borongan));
+                    $qty = $produk->qty_borongan * $request->qty_produk[$key];
                     $total_item_paid += $qty * $total_item_paid;
+                    $boronganQty = 1;
+                    $boronganQtyNya = $produk->qty_borongan;
                }else
                {
-                    $total_item_paid = $produk->harga_satuan;
+                    $total_item_paid = intval(str_replace('.', '', $produk->harga_satuan));
                     $qty = $request->qty_produk[$key];
                     $total_item_paid += $qty * $total_item_paid;
                }
@@ -206,7 +219,10 @@ class TransaksiController extends Controller
                 DB::table('transaksi_item')->insert([
                     'transaksi_id'=>$id,
                     'produk_id'=>$value,
+                    'borongan'=>$boronganQty,
                     'qty'=>$qty,
+                    'qty_borongan'=>$boronganQtyNya,
+                    'qty_real'=>$qtyReal,
                     'total'=>$total_item_paid,
                     'created_at'=>$createdAt
                 ]);
