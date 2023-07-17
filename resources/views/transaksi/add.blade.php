@@ -16,18 +16,18 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Tambah Transaksi</h4>
-                    <form class="form-sample" action="{{url('Transaksi_store')}}" method="POST" enctype="multipart/form-data">
+                    <form class="form-sample" action="{{url('transaksi_store')}}" method="POST" enctype="multipart/form-data">
                     	@csrf
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kode" required placeholder="Contoh : TRS-123" class="form-control" />
+                              <input type="text" name="kode" value="{{$kode}}" required placeholder="Contoh : TRS-123" class="form-control" />
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-9">
@@ -35,69 +35,53 @@
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kategori</label>
+                            <label class="col-sm-3 col-form-label">Customer</label>
                             <div class="col-sm-9">
-                              <select class="form-control" name="kategori" required>
-                              	<option value="" selected disabled>Pilih</option>
-                                <option value="pestisida">Pestisida</option>
-                                <option value="pupuk">Pupuk</option>
-                                <option value="alat">Alat</option>
-                                <option value="bibit">Bibit</option>
-                                <option value="vitamin">Vitamin</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kemasan</label>
-                            <div class="col-sm-9">
-                              <input type="text" name="kemasan" required class="form-control" placeholder="Contoh : Plastik" />
+                              <input type="text" name="customer"  required class="form-control" placeholder="Cth : Adi Pangabean" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Qty Borongan</label>
-                            <div class="col-sm-9">
-                              <input type="number" name="qty_borongan" required class="form-control" placeholder="Contoh : 10" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Satuan</label>
-                            <div class="col-sm-9">
-                              <input type="number" step="any" required name="harga_satuan" class="form-control" placeholder="Contoh : 10.000" />
-                            </div>
-                          </div>
-                        </div>
+                      <div class="row" style=";padding-bottom: 1%;">
+                        <p align="center">Daftar Produk</p>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Borongan</label>
-                            <div class="col-sm-9">
-                              <input type="number" step="any" required name="harga_borongan" class="form-control" placeholder="Contoh : 9.000" />
+                      <div class="row" style="justify-content: center;">
+                        @foreach($produk as $key => $item)
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <div class="col-auto">
+                                <input type="checkbox" name="produk_id[]" id="produk{{$item->id}}" value="{{$item->id}}"> {{$item->nama}} - {{$item->kategori}}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="col-md-6">
-                          
-                        </div>
+                          <div class="col-md-3">
+                            <div class="form-group row">
+                              <div class="col-auto">
+                                <input type="radio" onclick="borongan('<?php echo $item->id?>','<?php echo $item->qty_borongan?>')" name="tipe_produk[{{$key}}]"  value="borongan">&nbsp; Borongan &nbsp;
+                                <input type="radio" onclick="borongan('<?php echo $item->id?>','0')" name="tipe_produk[{{$key}}]" checked value="tidak">&nbsp; Tidak
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">
+                                Qty
+                              </label>
+                              <div class="col-sm-9">
+                                <input type="number" name="qty_produk[]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Cth : 10">
+                              </div>
+                            </div>
+                          </div>
+                        @endforeach
                       </div>
                       <div class="col-sm-12" align="right">
                       	<button class="btn btn-primary" type="submit">Simpan</button>
                       	&nbsp;
                       	<button class="btn btn-outline-secondary" type="reset">Reset</button>
                       	&nbsp;
-                      	<a class="btn btn-danger" href="{{url('Transaksi')}}" style="color: white;">Batal</a>
+                      	<a class="btn btn-danger" href="{{url('transaksi')}}" style="color: white;">Batal</a>
                       </div>
                     </form>
                   </div>
@@ -106,5 +90,10 @@
 	</div>
 @endsection
 @section('scriptcustom')
-
+<script type="text/javascript">
+  function borongan(id,qty)
+  {
+    $('#qty_produk'+id).val(qty);
+  }
+</script>
 @endsection

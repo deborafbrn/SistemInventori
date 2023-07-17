@@ -45,7 +45,7 @@ class TransaksiController extends Controller
                     ->get();
             foreach ($items as $itemKey => $itemValue) 
             {
-                $itemTrs[$value->id][$itemKey]['produk'] = $itemValue->name.' - '.$itemValue->kode;
+                $itemTrs[$value->id][$itemKey]['produk'] = $itemValue->nama.' - '.$itemValue->kode.' - '.$itemValue->qty;
             }
         }
         return view('transaksi.index',compact('data','itemTrs','request'));
@@ -54,7 +54,18 @@ class TransaksiController extends Controller
     public function create()
     {
         $produk = DB::table('produk')->get();
-        return view('transaksi.add',compact('produk'));
+        $ccPy=DB::table('transaksi')->count();
+        $noPy = $ccPy+1;
+        $arrPy = array_map('intval', str_split($noPy));
+        if(count($arrPy)==1){
+                $gnrPy = '00'.strval($noPy);
+            }elseif(count($arrPy)==2){
+                $gnrPy = '0'.strval($noPy);
+            }else{
+                 $gnrPy=strval($noPy);
+            }
+        $kode = 'TRS-'.$gnrPy; 
+        return view('transaksi.add',compact('produk','kode'));
     }
 
     public function edit($id)
@@ -76,7 +87,7 @@ class TransaksiController extends Controller
         $now =  Carbon::now('Asia/Jakarta')->format('Y-m-d');
         $total = 0;
         $qty_trs = 0;
-        if(count($request->produk_id) > 0)
+        if($request->produk_id)
         {
             foreach ($request->produk_id as $key => $value) 
             {
@@ -101,6 +112,7 @@ class TransaksiController extends Controller
             $transaksiId = DB::table('transaksi')->insertGetId([
                 'customer'=>$request->customer,
                 'tanggal'=>$now,
+                'kode'=>$request->kode,
                 'grandtotal'=>$total,
                 'total_produk'=>$qty_trs,
                 'created_at'=>$createdAt
@@ -143,7 +155,7 @@ class TransaksiController extends Controller
         $now =  Carbon::now('Asia/Jakarta')->format('Y-m-d');
         $total = 0;
         $qty_trs = 0;
-        if(count($request->produk_id) > 0)
+        if($request->produk_id)
         {
             foreach ($request->produk_id as $key => $value) 
             {
@@ -168,6 +180,7 @@ class TransaksiController extends Controller
             $transaksiId = DB::table('transaksi')->where('id',$id)->update([
                 'customer'=>$request->customer,
                 'tanggal'=>$now,
+                'kode'=>$request->kode,
                 'grandtotal'=>$total,
                 'total_produk'=>$qty_trs,
                 'updated_at'=>$createdAt

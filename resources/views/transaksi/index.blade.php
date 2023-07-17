@@ -25,7 +25,7 @@
 	                    		<form action="{{url('transaksi')}}">
 		                    		<div class="input-group mb-3">
 									  <input type="text" class="form-control" placeholder="Cari nama customer atau Kode transaksi" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{$request->search}}" name="search">
-									  <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+									  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 									  		<i class="mdi mdi-account-search"></i>
 									  </button>
 									</div>
@@ -53,11 +53,11 @@
 	                          		<td style="color: white;">{{$item->customer}}</td>
 	                          		<td style="color: white;">{{$item->kode}}</td>
 	                          		<td style="color: white;">{{$item->tanggal}}</td>
-	                          		<td style="color: white;">Rp {{$item->grantotal}}</td>
+	                          		<td style="color: white;">Rp {{number_format($item->grandtotal)}}</td>
 	                          		<td style="color: white;">{{$item->total_produk}}</td>
 	                          		<td style="color: white;">
-	                          			<ul>
-	                          				@foreach($item[$item->id] as $itemTrsKey => $itemTrsValue)
+	                          			<ul style="line-height: 30px;">
+	                          				@foreach($itemTrs[$item->id] as $itemTrsKey => $itemTrsValue)
 	                          					<li>
 	                          						Produk : {{$itemTrsValue['produk']}}
 	                          					</li>

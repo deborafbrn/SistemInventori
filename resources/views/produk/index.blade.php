@@ -43,6 +43,7 @@
 	                            <th> Harga Satuan </th>
 	                            <th> Harga Borongan</th>
 	                            <th> Qty Borongan</th>
+	                            <th> Stock</th>
 	                            <th> Action </th>
 	                          </tr>
 	                        </thead>
@@ -56,6 +57,7 @@
 	                          		<td style="color: white;">Rp {{$item->harga_satuan}}</td>
 	                          		<td style="color: white;">Rp {{$item->harga_borongan}}</td>
 	                          		<td style="color: white;">{{$item->qty_borongan}}</td>
+	                          		<td style="color: white;">{{$item->stock}}</td>
 	                          		<td>
 	                          			<a href="{{url('produk_edit/'.$item->id)}}" class="btn btn-info btn-sm"><i class="mdi mdi-table-edit"></i></a>
 	                          			&nbsp;

@@ -151,18 +151,19 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="{{url('assets/vendors/js/vendor.bundle.base.css')}}"></script>
-    <script src="{{url('assets/js/off-canvas.css')}}"></script>
-    <script src="{{url('assets/js/hoverable-collapse.css')}}"></script>
-    <script src="{{url('assets/js/misc.css')}}"></script>
-    <script src="{{url('assets/js/settings.css')}}"></script>
-    <script src="{{url('assets/js/todolist.css')}}"></script>
+    <script src="{{url('assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{url('assets/js/off-canvas.js')}}"></script>
+    <script src="{{url('assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{url('assets/js/misc.js')}}"></script>
+    <script src="{{url('assets/js/settings.js')}}"></script>
+    <script src="{{url('assets/js/todolist.js')}}"></script>
+    <script src="{{url('assets/js/jquery-3.7.0.min.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.css"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- Settings -->
     <script type="text/javascript">
       @if($message=Session::get('success'))

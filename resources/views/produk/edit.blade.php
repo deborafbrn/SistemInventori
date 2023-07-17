@@ -98,7 +98,12 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Stock</label>
+                            <div class="col-sm-9">
+                              <input type="number" required name="stock" value="{{$data->stock}}" class="form-control" placeholder="Contoh : 200" />
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-sm-12" align="right">

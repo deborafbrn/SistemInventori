@@ -61,6 +61,7 @@ class ProdukController extends Controller
             'kategori'=>$request->kategori,
             'nama'=>$request->nama,
             'kode'=>$request->kode,
+            'stock'=>$request->stock,
             'kemasan'=>$request->kemasan,
             'qty_borongan'=>$request->qty_borongan,
             'harga_satuan'=>$request->harga_satuan,
@@ -77,8 +78,9 @@ class ProdukController extends Controller
         $check = DB::table('produk')->where('kode',$request->kode)->first();
         if($check)
         {
-            if($check->id == $id)
+            if($check->id != $id)
             {
+               // dd($check->id.' '.$id);
                 return redirect()->back()->with('error','Mohon maaf data produk dengan kode '.$request->kode.' sudah terdaftar');
             }
         }
@@ -86,6 +88,7 @@ class ProdukController extends Controller
             'kategori'=>$request->kategori,
             'nama'=>$request->nama,
             'kode'=>$request->kode,
+            'stock'=>$request->stock,
             'kemasan'=>$request->kemasan,
             'harga_satuan'=>$request->harga_satuan,
             'harga_borongan'=>$request->harga_borongan,
