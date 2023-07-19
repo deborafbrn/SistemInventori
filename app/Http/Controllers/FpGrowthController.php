@@ -203,9 +203,14 @@ class FpGrowthController extends Controller
             $finalSupport[$key]['support'] = $resultSupport;
 
             $expP = explode(',', $value['pattern']);
-            $totalA = $firstArrItemFix[$expP[0]];
-            $resultConf = round($freq / $totalA * 100);
-            $finalSupport[$key]['conf'] = $resultConf > 100 ? 100 : $resultConf;
+            $finalSupport[$key]['conf'] = 0;
+            if(isset($firstArrItemFix[$expP[0]]))
+            {
+                $totalA = $firstArrItemFix[$expP[0]];
+                $resultConf = round($freq / $totalA * 100);
+                $finalSupport[$key]['conf'] = $resultConf > 100 ? 100 : $resultConf;
+            }
+            
         }
         $finalSupport = $this->array_sort_by_column_desc($finalSupport,'conf');
         
@@ -227,9 +232,12 @@ class FpGrowthController extends Controller
                 $wordFinal .= '<m style="color:green;">'.implode(',', $wrd2).'</m>';
            }else
            {
-                $pd1 = DB::table('produk')->where('kode',$expP[0])->first();
-                $pd2 = DB::table('produk')->where('kode',$expP[1])->first();
-                $wordFinal .= '<p>Jika membeli <m style="color:red;">'.$pd1->nama.'</m> maka akan membeli <m style="color:green;">'.$pd2->nama.'</m></p>';
+                if(isset($expP[1]))
+                {
+                     $pd1 = DB::table('produk')->where('kode',$expP[0])->first();
+                     $pd2 = DB::table('produk')->where('kode',$expP[1])->first();
+                     $wordFinal .= '<p>Jika membeli <m style="color:red;">'.$pd1->nama.'</m> maka akan membeli <m style="color:green;">'.$pd2->nama.'</m></p>';
+                }
            }
         }
        // dd($wordFinal);

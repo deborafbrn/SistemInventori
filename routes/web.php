@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dummy', [HomeController::class, 'dataDummy']);
 Route::post('/login_sistem', [LoginController::class, 'loginUser']);
 
 // Produk
