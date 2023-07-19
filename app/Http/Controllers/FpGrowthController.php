@@ -99,7 +99,7 @@ class FpGrowthController extends Controller
         $supportFilterProdukId = [];
         foreach ($support as $key => $value) 
         {
-            if($value['support'] >= 20)
+            if($value['support'] >= 30)
             {
                 $noSupportFilter++;
                 $supportFilter[$noSupportFilter]['transaksi_id'] = $value['transaksi_id'];

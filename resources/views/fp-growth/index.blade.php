@@ -137,7 +137,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Ferekuensi Kemunculan Item Yang Memenuhi Support Minimal (20%)</p>
+						<p align="center">Ferekuensi Kemunculan Item Yang Memenuhi Support Minimal (30%)</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
