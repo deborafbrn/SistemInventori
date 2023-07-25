@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sistem Pembantu Keputusan Menentukan Kombinasi Produk Penjualan FP Growth Admin</title>
+    <title>Sistem Inventori dengan FP Growth</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{url('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/vendors/css/vendor.bundle.base.css')}}">
@@ -26,7 +26,7 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="" href="{{url('/')}}" style="color: white;">SIMPEKPPFG</a>
+          <a class="" href="{{url('/')}}" style="color: white;">SIDFG</a>
           <a class="sidebar-brand brand-logo-mini" href="{{url('/')}}">S</a>
         </div>
         <ul class="nav">
@@ -81,7 +81,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-sync"></i>
               </span>
-              <span class="menu-title">Fp Growth</span>
+              <span class="menu-title">FP Growth</span>
             </a>
           </li>
           @endif
@@ -100,7 +100,7 @@
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-               Selamat Datang Di Sistem Pembantu Keputusan Menentukan Kombinasi Produk Penjualan FP Growth
+                Halo, {{Auth::user()->name}}! Selamat Datang Sistem Inventori dengan FP Growth
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
@@ -121,7 +121,7 @@
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
+                      <p class="preview-subject mb-1">Log Out</p>
                     </div>
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -142,10 +142,10 @@
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Debora Af {{date('Y')}}</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> To 
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Debora Febriana {{date('Y')}}</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
                 <a href="{{url('/')}}" target="_blank">
-                Sistem Pembantu Keputusan Menentukan Kombinasi Produk Penjualan FP Growth</a> SIMPEKPPFG</span>
+                Sistem Inventori dengan FP Growth</a> SIDFG</span>
             </div>
           </footer>
           <!-- partial -->

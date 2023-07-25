@@ -23,7 +23,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
-                              <input type="text" name="nama" required placeholder="Contoh : Pupuk gas pro" class="form-control" />
+                              <input type="text" name="nama" required placeholder="Contoh: Pupuk" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -31,7 +31,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kode" required class="form-control" placeholder="Contoh : GSP10" />
+                              <input type="text" name="kode" required class="form-control" placeholder="Contoh: PPK001" />
                             </div>
                           </div>
                         </div>
@@ -56,7 +56,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kemasan</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kemasan" required class="form-control" placeholder="Contoh : Plastik" />
+                              <input type="text" name="kemasan" required class="form-control" placeholder="Contoh: Plastik" />
                             </div>
                           </div>
                         </div>
@@ -66,7 +66,7 @@
                          <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Qty Borongan</label>
                             <div class="col-sm-9">
-                              <input type="number" name="qty_borongan" required class="form-control" placeholder="Contoh : 10" />
+                              <input type="number" name="qty_borongan" required class="form-control" placeholder="Contoh: 10" />
                             </div>
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga Satuan</label>
                             <div class="col-sm-9">
-                              <input type="number" step="any" required name="harga_satuan" class="form-control" placeholder="Contoh : 10.000" />
+                              <input type="number" step="any" required name="harga_satuan" class="form-control" placeholder="Contoh: 10.000" />
                             </div>
                           </div>
                         </div>
@@ -84,7 +84,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga Borongan</label>
                             <div class="col-sm-9">
-                              <input type="number" step="any" required name="harga_borongan" class="form-control" placeholder="Contoh : 9.000" />
+                              <input type="number" step="any" required name="harga_borongan" class="form-control" placeholder="Contoh: 100.000" />
                             </div>
                           </div>
                         </div>
@@ -92,7 +92,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Stock</label>
                             <div class="col-sm-9">
-                              <input type="number" required name="stock" class="form-control" placeholder="Contoh : 200" />
+                              <input type="number" required name="stock" class="form-control" placeholder="Contoh: 100" />
                             </div>
                           </div>
                         </div>

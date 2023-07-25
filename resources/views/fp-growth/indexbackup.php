@@ -4,10 +4,10 @@
 
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title">FP-Growth </h3>
+		<h3 class="page-title">FP Growth </h3>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">FP-Growth</a></li>
+				<li class="breadcrumb-item"><a href="#">FP Growth</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Daftar</li>
 			</ol>
 		</nav>
@@ -24,19 +24,19 @@
 							<input type="date" class="form-control" required name="end_date" value="{{$request->end_date}}">
 						</div>
 						<div class="col-md-2 pt-1" align="right">
-							<button class="btn btn-success" type="submit">Filter Data Fp Growth</button>
+							<button class="btn btn-success" type="submit">Filter Data FP-Growth</button>
 						</div>
 					</div>
 				</form>
 				<div class="row">
 					<div class="col-md-6">
-						<p align="center">Item Set</p>
+						<p align="center">Itemset</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
 	                      		<tr>
 		                      		<th>TID</th>
-		                      		<th>ItemSet (Kode Produk)</th>
+		                      		<th>Itemset (Kode Produk)</th>
 	                      		</tr>
 	                      	</thead>
 	                      	<tbody>

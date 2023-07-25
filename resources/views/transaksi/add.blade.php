@@ -23,7 +23,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kode" value="{{$kode}}" required placeholder="Contoh : TRS-123" class="form-control" />
+                              <input type="text" name="kode" value="{{$kode}}" required placeholder="Contoh : TRX-123" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -39,7 +39,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Customer</label>
                             <div class="col-sm-9">
-                              <input type="text" name="customer"  required class="form-control" placeholder="Cth : Adi Pangabean" />
+                              <input type="text" name="customer"  required class="form-control" placeholder="Contoh: Adi Pangabean" />
                             </div>
                           </div>
                         </div>
@@ -70,7 +70,7 @@
                                 Qty
                               </label>
                               <div class="col-sm-9">
-                                <input type="number" name="qty_produk[{{$key}}]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Cth : 10">
+                                <input type="number" name="qty_produk[{{$key}}]" id="qty_produk{{$item->id}}" class="form-control" value="0" placeholder="Contoh: 10">
                               </div>
                             </div>
                           </div>

@@ -18,13 +18,13 @@
 	                  	<div class="row">
 	                  		<div class="col-md-6">
 	                  			<a class="btn btn-primary" style="color: white;" href="{{url('transaksi_create')}}">
-	                  				<i class="mdi mdi-plus-circle-outline"></i> Tambah Data
+	                  				<i class="mdi mdi-plus-circle-outline"></i> Tambah Transaksi
 	                  			</a>
 	                  		</div>
 	                    	<div class="col-md-6">
 	                    		<form action="{{url('transaksi')}}">
 		                    		<div class="input-group mb-3">
-									  <input type="text" class="form-control" placeholder="Cari nama customer atau Kode transaksi" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{$request->search}}" name="search">
+									  <input type="text" class="form-control" placeholder="Cari Nama Customer atau Kode Transaksi" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{$request->search}}" name="search">
 									  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 									  		<i class="mdi mdi-account-search"></i>
 									  </button>

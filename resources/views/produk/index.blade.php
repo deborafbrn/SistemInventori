@@ -18,7 +18,7 @@
 	                  	<div class="row">
 	                  		<div class="col-md-6">
 	                  			<a class="btn btn-primary" style="color: white;" href="{{url('produk_create')}}">
-	                  				<i class="mdi mdi-plus-circle-outline"></i> Tambah Data
+	                  				<i class="mdi mdi-plus-circle-outline"></i> Tambah Produk
 	                  			</a>
 	                  		</div>
 	                  		

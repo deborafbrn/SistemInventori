@@ -90,9 +90,9 @@ class FpGrowthController extends Controller
             $support[$key]['produk_id'] = $value['produk_id'];
             $support[$key]['total'] = $value['total'];
             $support[$key]['kode'] = $value['kode'];
-            $support[$key]['support'] = round($value['total'] / count($itemFrekuensi) * 100);
+            $support[$key]['support'] = round($value['total'] / count($data) * 100);
         }
-       // dd($support);
+        //dd($support);
         $supportFilter = [];
         $noSupportFilter = -1;
         $supportFilterTrsId = [];
@@ -114,7 +114,7 @@ class FpGrowthController extends Controller
         $supportFilterProdukId = array_unique($supportFilterProdukId);
         $supportFilter = $this->array_sort_by_column($supportFilter,'total');
         $tempKombinasi = [];
-        foreach ($support as $i => $v) 
+        foreach ($supportFilter as $i => $v) 
         {
             $kombinasi[$v['produk_id']] = [];
             $tempKombinasi[$v['produk_id']] = [];
@@ -157,8 +157,6 @@ class FpGrowthController extends Controller
                         ->join('produk as pd','pd.id','=','ti.produk_id')
                         ->whereIn('ti.transaksi_id',$tiId)
                         ->where('ti.produk_id',$value)
-                        //->select(DB::raw('COUNT(ti.transaksi_id) as total'),'pd.kode','ti.transaksi_id','ti.produk_id')
-                        //->groupBy('ti.produk_id')
                         ->count();
            $pdNya = DB::table('produk')->where('id',$value)->select('kode')->first();
            $firstArrItemFix[$pdNya->kode] = $itemFrekuensi_ini;
@@ -198,6 +196,7 @@ class FpGrowthController extends Controller
         {
             $freq = $value['frekuensi'];
             $totalTrs = count($itemFrekuensi);
+            //dd($data);
             $resultSupport = round($freq / $totalTrs * 100);
             $finalSupport[$key]['pattern'] = $value['pattern'];
             $finalSupport[$key]['support'] = $resultSupport;
@@ -207,8 +206,9 @@ class FpGrowthController extends Controller
             if(isset($firstArrItemFix[$expP[0]]))
             {
                 $totalA = $firstArrItemFix[$expP[0]];
+                //dd($totalA);
                 $resultConf = round($freq / $totalA * 100);
-                $finalSupport[$key]['conf'] = $resultConf > 100 ? 100 : $resultConf;
+                $finalSupport[$key]['conf'] = $resultConf;
             }
             
         }
@@ -234,15 +234,16 @@ class FpGrowthController extends Controller
            {
                 if(isset($expP[1]))
                 {
-                     $pd1 = DB::table('produk')->where('kode',$expP[0])->first();
-                     $pd2 = DB::table('produk')->where('kode',$expP[1])->first();
+                     $pd1 = DB::table('produk')->where('kode',$expP[1])->first();
+                     $pd2 = DB::table('produk')->where('kode',$expP[0])->first();
                      $wordFinal .= '<p>Jika membeli <m style="color:red;">'.$pd1->nama.'</m> maka akan membeli <m style="color:green;">'.$pd2->nama.'</m></p>';
                 }
            }
         }
        // dd($wordFinal);
         $data = [
-                    'arr'=>$arr,'produk'=>$produkArr
+                    'arr'=>$arr
+                    ,'produk'=>$produkArr
                     ,'frekuensi'=>$itemFrekuensi
                     ,'support'=>$support
                     ,'support_filter'=>$supportFilter

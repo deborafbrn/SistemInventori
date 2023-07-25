@@ -4,10 +4,10 @@
 
 <div class="content-wrapper">
 	<div class="page-header">
-		<h3 class="page-title">FP-Growth </h3>
+		<h3 class="page-title">FP Growth </h3>
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">FP-Growth</a></li>
+				<li class="breadcrumb-item"><a href="#">FP Growth</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Daftar</li>
 			</ol>
 		</nav>
@@ -24,20 +24,20 @@
 							<input type="date" class="form-control" required name="end_date" value="{{$request->end_date}}">
 						</div>
 						<div class="col-md-2 pt-1" align="right">
-							<button class="btn btn-success" type="submit">Filter Data Fp Growth</button>
+							<button class="btn btn-success" type="submit">Filter Data FP Growth</button>
 						</div>
 					</div>
 				</form>
-				<div class="row">
-					<p align="center">Data Transaksi FpGrowth {{$request->start_date}} - {{$request->end_date}}</p>
+				<div class="row" style="padding-top: 20px;">
+					<p align="center">Perhitungan Data Transaksi Dari {{$request->start_date}} - {{$request->end_date}}</p>
 					<div class="col-md-12">
-						<p align="center">Item Set</p>
+						<p align="center">Itemset</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
 	                      		<tr>
 		                      		<th>TID</th>
-		                      		<th>ItemSet (Kode Produk)</th>
+		                      		<th>Itemset (Kode Produk)</th>
 	                      		</tr>
 	                      	</thead>
 	                      	<tbody>
@@ -93,7 +93,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Ferekuensi Kemunculan Item</p>
+						<p align="center">Frekuensi Kemunculan Setiap Item</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
@@ -114,14 +114,14 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Ferekuensi Kemunculan Item Dengan Support</p>
+						<p align="center">Frekuensi Kemunculan Item Dengan Nilai Support</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
 	                      		<tr>
 		                      		<th>Item</th>
 		                      		<th>Frekuensi</th>
-		                      		<th>Support</th>
+		                      		<th>Nilai Support</th>
 	                      		</tr>
 	                      	</thead>
 	                      	<tbody>
@@ -137,7 +137,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Ferekuensi Kemunculan Item Yang Memenuhi Support Minimal (30%)</p>
+						<p align="center">Frekuensi Kemunculan Item Dengan Support Count Minimal (30%)</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
@@ -159,7 +159,7 @@
 	                      </table>
 	                  	</div>
 					</div>
-					<div class="col-md-12" style="padding-top: 20px;">
+					<!-- <div class="col-md-12" style="padding-top: 20px;">
 						<p align="center">Item Fp Growth & Pointer</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
@@ -179,15 +179,15 @@
 	                      	</tbody>
 	                      </table>
 	                  	</div>
-					</div>
+					</div> -->
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Frekuensi Item Set</p>
+						<p align="center">Frekuensi Itemset</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
 	                      		<tr>
 		                      		<th>Item</th>
-		                      		<th>Patter Frekuensi Item Set</th>
+		                      		<th>Pattern Frekuensi Itemset</th>
 	                      		</tr>
 	                      	</thead>
 	                      	<tbody>
@@ -202,7 +202,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Frekuensi Pattern Item Set</p>
+						<p align="center">Hasil Pattern Frekuensi Itemset</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>
@@ -223,7 +223,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Rule Yang Terbentuk</p>
+						<p align="center">Rules Yang Terbentuk</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>

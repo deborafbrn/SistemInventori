@@ -23,7 +23,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kode</label>
                             <div class="col-sm-9">
-                              <input type="text" name="kode" value="{{$data->kode}}" required placeholder="Contoh : TRS-123" class="form-control" />
+                              <input type="text" name="kode" value="{{$data->kode}}" required placeholder="Contoh : TRX-123" class="form-control" />
                             </div>
                           </div>
                         </div>
