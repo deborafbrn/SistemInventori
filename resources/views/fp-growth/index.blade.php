@@ -17,13 +17,16 @@
 			<div class="card-body">
 				<form action="{{url('fp-growth')}}" style="display: contents;">
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<input type="date" name="start_date" required class="form-control" value="{{$request->start_date}}">
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<input type="date" class="form-control" required name="end_date" value="{{$request->end_date}}">
 						</div>
-						<div class="col-md-2 pt-1" align="right">
+						<div class="col-md-3">
+							<input type="number" class="form-control" required name="support" value="{{$request->support}}" placeholder="Contoh : 20">
+						</div>
+						<div class="col-md-3 pt-1" align="center">
 							<button class="btn btn-success" type="submit">Filter Data FP Growth</button>
 						</div>
 					</div>
@@ -137,7 +140,7 @@
 	                  	</div>
 					</div>
 					<div class="col-md-12" style="padding-top: 20px;">
-						<p align="center">Frekuensi Kemunculan Item Dengan Support Count Minimal (30%)</p>
+						<p align="center">Frekuensi Kemunculan Item Dengan Support Count Minimal ({{$request->support}}%)</p>
 						<div class="table-responsive">
 	                      <table class="table table-striped">
 	                      	<thead>

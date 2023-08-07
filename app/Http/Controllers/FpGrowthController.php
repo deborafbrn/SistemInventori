@@ -24,7 +24,7 @@ class FpGrowthController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->getTransaksi($request->start_date,$request->end_date);
+        $data = $this->getTransaksi($request->start_date,$request->end_date,$request->support);
         $transaksi = $data['arr'];
         $produk = $data['produk'];
         $frekuensi = $data['frekuensi'];
@@ -38,7 +38,7 @@ class FpGrowthController extends Controller
         return view('fp-growth.index',compact('request','transaksi','produk','frekuensi','support','supportFilter','pattern','patternDetail','final','word'));
     }
 
-    public function getTransaksi($start,$end)
+    public function getTransaksi($start,$end,$supportRequest)
     {
         $data = DB::table('transaksi')->whereBetween('tanggal',[$start,$end])->get();
         $arr = [];
@@ -83,6 +83,7 @@ class FpGrowthController extends Controller
                         ->groupBy('ti.produk_id')
                         ->get();
         $itemFrekuensi = json_decode(json_encode($itemFrekuensi),true);
+        //dd($itemFrekuensi);
         $support = [];
         foreach ($itemFrekuensi as $key => $value) 
         {
@@ -99,7 +100,7 @@ class FpGrowthController extends Controller
         $supportFilterProdukId = [];
         foreach ($support as $key => $value) 
         {
-            if($value['support'] >= 30)
+            if($value['support'] >= $supportRequest)
             {
                 $noSupportFilter++;
                 $supportFilter[$noSupportFilter]['transaksi_id'] = $value['transaksi_id'];
@@ -161,7 +162,7 @@ class FpGrowthController extends Controller
            $pdNya = DB::table('produk')->where('id',$value)->select('kode')->first();
            $firstArrItemFix[$pdNya->kode] = $itemFrekuensi_ini;
         }
-        //dd($firstArrItemFix);
+
         $finalKombinasi = [];
         $pattern = [];
         $patternNo = 0;
@@ -195,25 +196,27 @@ class FpGrowthController extends Controller
         foreach ($pattern as $key => $value) 
         {
             $freq = $value['frekuensi'];
-            $totalTrs = count($itemFrekuensi);
+            $totalTrs = count($data);
             //dd($data);
             $resultSupport = round($freq / $totalTrs * 100);
-            $finalSupport[$key]['pattern'] = $value['pattern'];
-            $finalSupport[$key]['support'] = $resultSupport;
-
-            $expP = explode(',', $value['pattern']);
-            $finalSupport[$key]['conf'] = 0;
-            if(isset($firstArrItemFix[$expP[0]]))
+            if($resultSupport >= $supportRequest)
             {
-                $totalA = $firstArrItemFix[$expP[0]];
-                //dd($totalA);
-                $resultConf = round($freq / $totalA * 100);
-                $finalSupport[$key]['conf'] = $resultConf;
+                $finalSupport[$key]['pattern'] = $value['pattern'];
+                $finalSupport[$key]['support'] = $resultSupport;
+
+                $expP = explode(',', $value['pattern']);
+                $finalSupport[$key]['conf'] = 0;
+                if(isset($firstArrItemFix[$expP[0]]))
+                {
+                    $totalA = $firstArrItemFix[$expP[0]];
+                    $resultConf = round($freq / $totalA * 100);
+                    $finalSupport[$key]['conf'] = $resultConf;
+                }
             }
             
         }
         $finalSupport = $this->array_sort_by_column_desc($finalSupport,'conf');
-        
+       // dd($finalSupport);
         $wordFinal = '';
         foreach ($finalSupport as $key => $value) 
         {
